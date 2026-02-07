@@ -1,32 +1,44 @@
 const express = require("express");
-const fetch = require("node-fetch");
-const cors = require("cors");
+const { spawn } = require("child_process");
 
 const app = express();
-app.use(cors());
+const PORT = 3000;
 
-app.get("/proxy", async (req, res) => {
-  const target = req.query.url;
-  if (!target) return res.status(400).send("Missing url");
+/**
+ * Usage:
+ * http://localhost:3000/restream?url=MP4_URL
+ */
+app.get("/restream", (req, res) => {
+  const inputUrl = req.query.url;
 
-  try {
-    const headers = {};
-    if (req.headers.range) {
-      headers["range"] = req.headers.range;
-    }
-
-    const response = await fetch(target, { headers });
-
-    res.status(response.status);
-    response.headers.forEach((value, key) => {
-      res.setHeader(key, value);
-    });
-
-    response.body.pipe(res);
-  } catch (err) {
-    res.status(500).send("Proxy error");
+  if (!inputUrl) {
+    return res.status(400).send("Missing MP4 url");
   }
+
+  res.setHeader("Content-Type", "video/mp4");
+  res.setHeader("Transfer-Encoding", "chunked");
+
+  const ffmpeg = spawn("ffmpeg", [
+    "-re",
+    "-i", inputUrl,
+    "-c:v", "copy",
+    "-c:a", "copy",
+    "-movflags", "frag_keyframe+empty_moov",
+    "-f", "mp4",
+    "pipe:1"
+  ]);
+
+  ffmpeg.stdout.pipe(res);
+
+  ffmpeg.stderr.on("data", data => {
+    console.log(data.toString());
+  });
+
+  req.on("close", () => {
+    ffmpeg.kill("SIGKILL");
+  });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Proxy running on", PORT));
+app.listen(PORT, () => {
+  console.log(`MP4 restream server running on http://localhost:${PORT}`);
+});
