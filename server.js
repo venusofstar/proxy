@@ -73,9 +73,9 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`Test1 → http://localhost:${PORT}/gold1.mp4`);
-  console.log(`Test2 → http://localhost:${PORT}/gold2.mp4`);
-    console.log(`Test1 → http://localhost:${PORT}/gold3.mp4`);
-  console.log(`Test2 → http://localhost:${PORT}/gold4.mp4`);
-    console.log(`Test2 → http://localhost:${PORT}/gold5.mp4`);
+  console.log(`Test1 → http://localhost:${PORT}/gold2.mp4`);
+  console.log(`Test2 → http://localhost:${PORT}/gold3.mp4`);
+    console.log(`Test1 → http://localhost:${PORT}/gold4.mp4`);
+  console.log(`Test2 → http://localhost:${PORT}/gold5.mp4`);
+    console.log(`Test2 → http://localhost:${PORT}/gold6.mp4`);
 });
