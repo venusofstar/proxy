@@ -1,14 +1,12 @@
 {
-  "name": "stream-proxy",
+  "name": "mp4-restream",
   "version": "1.0.0",
+  "description": "Restream MP4 URL to MP4 URL",
   "main": "server.js",
-  "type": "commonjs",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "node-fetch": "^2.6.9",
-    "cors": "^2.8.5"
+    "express": "^4.19.2"
   }
 }
