@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashing Message</title>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .text {
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 15px;
+    animation: blink 0.5s infinite, colorShift 2s infinite;
+  }
+
+  /* Blinking effect */
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Rainbow color animation */
+  @keyframes colorShift {
+    0% { color: red; }
+    20% { color: yellow; }
+    40% { color: lime; }
+    60% { color: cyan; }
+    80% { color: magenta; }
+    100% { color: red; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="text">
+    BAHAL MAHINA UTAK NA TULAD MO
+  </div>
+</body>
+</html>
