@@ -1,0 +1,14 @@
+{
+  "name": "iptv-proxy-server",
+  "version": "1.0.0",
+  "description": "HLS IPTV Proxy Restream Server",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2"
+  }
+}
